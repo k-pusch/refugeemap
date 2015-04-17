@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>carto6</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.13/themes/css/cartodb.css" />
+    <!-- build:css styles/main.css?v=2 -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <a href="http://static.apps.welt.de/2015/gewalt_karte/" target="_blank"><img id="mobilefallback" src="http://www.welt.de/bin/DWO_IP_Hetze_Fluechtlinge_as__Mobile_Teaser-139562076.jpg"/></a>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+<style type="cartocss/text" id="asyl">
+#asylbewerber_pro_einwohner{
+  polygon-fill: #ECF0F6;
+  polygon-opacity: 0.8;
+  line-color: #012700;
+  line-width: 1;
+  line-opacity: 0.3;
+}
+#asylbewerber_pro_einwohner [ antrage_100_000_einw <= 387.839903455] {
+   polygon-fill: #0064a0;
+}
+#asylbewerber_pro_einwohner [ antrage_100_000_einw <= 362.471955665] {
+   polygon-fill: #257bae;
+}
+#asylbewerber_pro_einwohner [ antrage_100_000_einw <= 296.710627276] {
+   polygon-fill: #4e93bd;
+}
+#asylbewerber_pro_einwohner [ antrage_100_000_einw <= 280.374480647] {
+   polygon-fill: #73a9cb;
+}
+#asylbewerber_pro_einwohner [ antrage_100_000_einw <= 259.365316048] {
+   polygon-fill: #99c1da;
+}
+#asylbewerber_pro_einwohner [ antrage_100_000_einw <= 231.104697751] {
+   polygon-fill: #bed8e7;
+}
+#asylbewerber_pro_einwohner [ antrage_100_000_einw <= 172.949340865] {
+   polygon-fill: #ECF0F6;
+}
+</style>
+
+<style type="cartocss/text" id="intensity">
+#gewalt_gegen_asylbewerber_flle_ab_jan_14[zoom<7]{
+  marker-fill: #FFCC00;
+  marker-width: 29;
+  marker-line-color: #FFF;
+  marker-line-width: 1.5;
+  marker-line-opacity: 1;
+  marker-fill-opacity: 1;
+  marker-comp-op: multiply;
+  marker-type: ellipse;
+  marker-placement: point;
+  marker-allow-overlap: true;
+  marker-clip: false;
+  marker-multi-policy: largest;
+}
+#gewalt_gegen_asylbewerber_flle_ab_jan_14[zoom<7]{
+  first/marker-fill: #ffe9b1;
+  first/marker-width: 20;
+  first/marker-line-color: #FFF;
+  first/marker-line-width: 1.5;
+  first/marker-line-opacity: 1;
+  first/marker-fill-opacity: 1;
+  first/marker-comp-op: multiply;
+  first/marker-type: ellipse;
+  first/marker-placement: point;
+  first/marker-allow-overlap: true;
+  first/marker-clip: false;
+  first/marker-multi-policy: largest;
+   second/marker-fill: #ffe9b1;
+  second/marker-width: 35;
+ second/marker-fill-opacity: 0.35;
+  second/marker-line-opacity: 0;
+  second/marker-comp-op: multiply;
+  second/marker-type: ellipse;
+  second/marker-placement: point;
+  second/marker-allow-overlap: true;
+  second/marker-clip: false;
+  second/marker-multi-policy: largest;
+
+  third/marker-fill: #ffe9b1;
+  third/marker-width: 49;
+ third/marker-fill-opacity: 0.25;
+  third/marker-line-opacity: 0;
+  third/marker-comp-op: multiply;
+  third/marker-type: ellipse;
+  third/marker-placement: point;
+  third/marker-allow-overlap: true;
+  third/marker-clip: false;
+  third/marker-multi-policy: largest;
+
+}
+
+#gewalt_gegen_asylbewerber_flle_ab_jan_14[zoom>=7]{
+  marker-fill-opacity: 0.9;
+  marker-line-color: #FFF;
+  marker-line-width: 1.5;
+  marker-line-opacity: 1;
+  marker-placement: point;
+  marker-type: ellipse;
+  marker-width: 10;
+  marker-fill: #FF6600;
+  marker-allow-overlap: true;
+}
+</style>
+<style type="cartocss/text" id="simple">
+#gewalt_gegen_asylbewerber_flle_ab_jan_14{
+  marker-fill-opacity: 0.9;
+  marker-line-color: #FFF;
+  marker-line-width: 1.5;
+  marker-line-opacity: 1;
+  marker-placement: point;
+  marker-type: ellipse;
+  marker-width: 10;
+  marker-fill: #FF6600;
+  marker-allow-overlap: true;
+}
+</style>
+<h1 class="headline">Gewalt und Hetze gegen Flüchtlinge in Deutschland</h1>
+<h2>Alle Vorfälle ab Januar 2014</h2>
+ <ul id="catswitch">
+    <li class="active all" data-category="Übersicht">Alle</li>
+    <li data-category="Brandanschlag">Brandanschläge</li>
+    <li data-category="Sachbeschädigung">Sachbeschädigungen</li>
+    <li data-category="Körperverletzung">Körperverletzungen</li>
+    <li data-category="Demonstration">Demonstrationen</li>
+    </ul>
+    <p class="intro">Zoomen Sie in die Karte und berühren Sie die Punkte, um weitere Informationen zu erhalten!</p>
+    <div class="mapwrapper">
+        <div id="map"></div>
+      <div id="tooltip"><ul></ul>
+      </div>
+      <div id="legend">
+        <ul>
+          <li class="refugees">
+            <span>Asylbewerber pro 100.000 Einwohner</span>
+            <div></div>
+            <span class="low">171</span>
+            <span class="high">386</span>
+          </li>
+
+          <li class="incidents">
+            <span>Zahl der Vorfälle</span>
+            <div></div>
+            <span class="low">gering</span>
+            <span class="high">hoch</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js"></script>
+
+        <!-- build:js scripts/main.js?v=2 -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

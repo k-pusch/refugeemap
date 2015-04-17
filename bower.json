@@ -1,0 +1,8 @@
+{
+  "name": "carto6",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.8.1",
+    "jquery": "~2.1.3"
+  }
+}
